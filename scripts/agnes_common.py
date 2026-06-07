@@ -35,6 +35,12 @@ PLATFORM_URL = "https://platform.agnes-ai.com"
 # 统一 User-Agent，用于请求与下载
 _USER_AGENT = "Mozilla/5.0 Agnes-CLI/1.0"
 
+# 本项目根目录（scripts/ 的父目录），用作输出文件的默认落点，
+# 避免被其他 agent 从外部目录调用时把文件散落到调用方项目中。
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+# 默认输出根目录（始终相对于本项目，而非 cwd）
+DEFAULT_OUTPUT_ROOT = PROJECT_ROOT / "output"
+
 
 # ─── 1. .env 文件自动加载 ─────────────────────────────────────────────
 
@@ -223,19 +229,32 @@ def download_file(file_url, output_path, label="文件"):
 def make_output_path(user_output, default_dir, file_suffix=".png"):
     """统一输出路径生成。
 
+    默认目录相对于本项目根目录（Agnes-Media-Create/）解析，而不是调用方的 cwd，
+    这样即便被其他 agent 从外部项目目录调用，生成的文件也会落到本项目的 output/ 中。
+
     Args:
-        user_output: 用户指定路径，None 表示使用默认目录 + 时间戳命名
-        default_dir: 默认输出目录（如 output/image/text-to-image）
+        user_output: 用户指定路径，None 表示使用默认目录 + 时间戳命名；
+                     支持相对路径（相对于本项目根目录）或绝对路径
+        default_dir: 默认输出目录（如 output/image/text-to-image），相对路径会
+                     以本项目根目录为基准解析
         file_suffix: 文件后缀，默认 .png
 
     Returns:
-        Path: 最终保存路径
+        Path: 最终保存路径（绝对路径）
     """
     if user_output:
-        return Path(user_output)
+        # 用户显式指定路径：绝对路径直接使用，相对路径以本项目根目录为基准
+        user_path = Path(user_output)
+        if user_path.is_absolute():
+            return user_path
+        return (PROJECT_ROOT / user_path).resolve()
+
+    # 默认路径：以本项目根目录为基准（而非 cwd），避免被其他 agent 调用时散落文件
+    default_abs = Path(default_dir)
+    if not default_abs.is_absolute():
+        default_abs = (PROJECT_ROOT / default_dir).resolve()
     timestamp = time.strftime("%Y%m%d_%H%M%S")
-    prefix = Path(default_dir) / f"{Path(default_dir).name}_{timestamp}{file_suffix}"
-    return prefix
+    return default_abs / f"{default_abs.name}_{timestamp}{file_suffix}"
 
 
 # ─── 6. 参数校验辅助函数 ──────────────────────────────────────────────
