@@ -1,6 +1,8 @@
 ---
-name: "agnes-media-create"
-description: "通过 Agnes Image 2.1 Flash API 进行文生图和图生图；通过 Agnes Video V2.0 API 进行文生视频和图生视频。当用户要求生成图片、视频，或根据描述创作/修改媒体内容时调用。"
+name: agnes-media-create
+description: 通过 Agnes Image 2.1 Flash API 进行文生图和图生图；通过 Agnes Video V2.0 API 进行文生视频和图生视频。当用户要求生成图片、视频，或根据描述创作/修改媒体内容时调用。
+license: MIT
+tags: ["agnes", "media-create", "image-generation", "video-generation", "text-to-image", "image-to-image", "text-to-video", "image-to-video", "ai-art", "creative-content"]
 ---
 
 # Agnes Media Create 媒体生成技能
