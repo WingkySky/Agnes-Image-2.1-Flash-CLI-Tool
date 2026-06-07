@@ -1,4 +1,8 @@
-# Agnes Image 2.1 Flash - Requirements
-# Install with: pip install -r agnes_image_requirements.txt
-
+# Agnes Image & Video - Requirements
+# Install with: pip install -r requirements.txt
+#
+# - openai  : 图像生成（agnes_image.py 使用的 OpenAI 兼容 SDK
+# - requests: 视频生成（agnes_video_*.py）与图像脚本中备用下载使用
+#
 openai>=1.0.0
+requests>=2.20.0
