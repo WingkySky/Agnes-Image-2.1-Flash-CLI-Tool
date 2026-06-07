@@ -1,0 +1,4 @@
+# Agnes Image 2.1 Flash - Requirements
+# Install with: pip install -r agnes_image_requirements.txt
+
+openai>=1.0.0

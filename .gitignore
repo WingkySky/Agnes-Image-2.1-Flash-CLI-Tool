@@ -1,0 +1,80 @@
+# ===========================================
+# Agnes Image - .gitignore
+# ===========================================
+
+# ---------- 环境变量文件 ----------
+# 包含 API Key，绝对不能上传到 GitHub
+.env
+.env.local
+.env.*.local
+
+# ---------- Python 相关 ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ---------- 虚拟环境 ----------
+venv/
+env/
+ENV/
+.venv/
+
+# ---------- 编辑器和IDE ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ---------- 操作系统文件 ----------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---------- 日志文件 ----------
+*.log
+logs/
+
+# ---------- 临时文件 ----------
+*.tmp
+*.bak
+*.old
+temp/
+tmp/
+
+# ---------- 图片输出目录 ----------
+# 生成的图片文件（可以选择是否上传）
+# 如果不想上传生成的图片，取消下面两行的注释
+# output/
+# *.png
+
+# ---------- 其他 ----------
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+*.pid
+*.seed
