@@ -24,7 +24,7 @@ Skill 根目录/（整个文件夹作为 Skill 被调用）
 ├── requirements.txt              # Python 依赖
 ├── .env.example                  # 环境变量示例
 ├── .env                          # 可选：本地 API Key 配置文件（无需 export 自动加载）
-├── src/
+├── scripts/
 │   ├── agnes_common.py           # 通用模块（.env 加载 / HTTP / 下载 / 路径）
 │   ├── agnes_image_common.py     # 图片 API 封装
 │   ├── agnes_video_common.py     # 视频 API 封装（异步任务 + 轮询）
@@ -75,7 +75,7 @@ export AGNES_API_KEY='your-api-key'
 **方式 C：命令行参数**
 
 ```bash
-python src/agnes_text_to_image.py "提示词" --key 'your-api-key'
+python scripts/agnes_text_to_image.py "提示词" --key 'your-api-key'
 ```
 
 优先级：命令行参数 > 环境变量 > `.env` 文件。
@@ -91,20 +91,20 @@ python src/agnes_text_to_image.py "提示词" --key 'your-api-key'
 **调用方式**：
 
 ```bash
-python src/agnes_text_to_image.py "文本提示词"
+python scripts/agnes_text_to_image.py "文本提示词"
 ```
 
 **示例**：
 
 ```bash
 # 基础用法
-python src/agnes_text_to_image.py "一只坐在月球上的小猫，超现实主义风格"
+python scripts/agnes_text_to_image.py "一只坐在月球上的小猫，超现实主义风格"
 
 # 指定输出路径
-python src/agnes_text_to_image.py "可爱的小狗" -o custom/dog.png
+python scripts/agnes_text_to_image.py "可爱的小狗" -o custom/dog.png
 
 # 自定义模型与尺寸
-python src/agnes_text_to_image.py "山脉风景" --size 1024x512 --quality hd
+python scripts/agnes_text_to_image.py "山脉风景" --size 1024x512 --quality hd
 ```
 
 ### 2. 图生图（Image-to-Image）
@@ -114,17 +114,17 @@ python src/agnes_text_to_image.py "山脉风景" --size 1024x512 --quality hd
 **调用方式**：
 
 ```bash
-python src/agnes_image_to_image.py "文本提示词" -i 输入图片路径
+python scripts/agnes_image_to_image.py "文本提示词" -i 输入图片路径
 ```
 
 **示例**：
 
 ```bash
 # 传入本地图片（自动转为 base64）
-python src/agnes_image_to_image.py "改成日落风格" -i input.jpg
+python scripts/agnes_image_to_image.py "改成日落风格" -i input.jpg
 
 # 传入公开 URL
-python src/agnes_image_to_image.py "把画变成油画风格" -i https://example.com/img.jpg
+python scripts/agnes_image_to_image.py "把画变成油画风格" -i https://example.com/img.jpg
 ```
 
 ### 3. 文生视频（Text-to-Video）
@@ -134,7 +134,7 @@ python src/agnes_image_to_image.py "把画变成油画风格" -i https://example
 **调用方式**：
 
 ```bash
-python src/agnes_text_to_video.py "文本提示词"
+python scripts/agnes_text_to_video.py "文本提示词"
 ```
 
 **视频参数**：
@@ -147,11 +147,11 @@ python src/agnes_text_to_video.py "文本提示词"
 
 ```bash
 # 基础用法（约 5 秒短视频，121 帧 / 24 fps）
-python src/agnes_text_to_video.py "一位身穿飘逸长袍的年轻剑客，在雨夜都市中穿行" \
+python scripts/agnes_text_to_video.py "一位身穿飘逸长袍的年轻剑客，在雨夜都市中穿行" \
     --num-frames 121 --frame-rate 24
 
 # 约 10 秒视频，更高分辨率
-python src/agnes_text_to_video.py "一只独角兽奔跑在彩虹山脉上" \
+python scripts/agnes_text_to_video.py "一只独角兽奔跑在彩虹山脉上" \
     --width 1280 --height 720 --num-frames 241 --frame-rate 24
 ```
 
@@ -166,22 +166,22 @@ python src/agnes_text_to_video.py "一只独角兽奔跑在彩虹山脉上" \
 **调用方式**：
 
 ```bash
-python src/agnes_image_to_video.py "文本提示词" --image 图片URL
+python scripts/agnes_image_to_video.py "文本提示词" --image 图片URL
 ```
 
 **示例**：
 
 ```bash
 # 单图 → 视频（图生视频）
-python src/agnes_image_to_video.py "人物缓慢转身回望镜头" \
+python scripts/agnes_image_to_video.py "人物缓慢转身回望镜头" \
     --image https://example.com/portrait.png
 
 # 多图 → 视频
-python src/agnes_image_to_video.py "平滑变换" \
+python scripts/agnes_image_to_video.py "平滑变换" \
     --image https://example.com/a.png --image https://example.com/b.png
 
 # 关键帧动画
-python src/agnes_image_to_video.py "平滑过渡" \
+python scripts/agnes_image_to_video.py "平滑过渡" \
     --image https://example.com/kf1.png --image https://example.com/kf2.png \
     --keyframes
 ```
@@ -261,7 +261,7 @@ output/
 当用户说「帮我生成一张风景图」：
 
 ```bash
-python src/agnes_text_to_image.py "雄伟的雪山风景，早晨阳光，油画风格"
+python scripts/agnes_text_to_image.py "雄伟的雪山风景，早晨阳光，油画风格"
 ```
 
 ### 场景 2：图生图
@@ -269,7 +269,7 @@ python src/agnes_text_to_image.py "雄伟的雪山风景，早晨阳光，油画
 当用户说「把这张图片改成日落风格」：
 
 ```bash
-python src/agnes_image_to_image.py "改成日落风格" -i /path/to/input.jpg
+python scripts/agnes_image_to_image.py "改成日落风格" -i /path/to/input.jpg
 ```
 
 ### 场景 3：文生视频
@@ -277,7 +277,7 @@ python src/agnes_image_to_image.py "改成日落风格" -i /path/to/input.jpg
 当用户说「生成一个剑侠在都市中穿行的视频」：
 
 ```bash
-python src/agnes_text_to_video.py "一位身穿飘逸古风长袍的年轻剑客，在霓虹闪烁的现代都市摩天大楼之间奔跑穿梭，电影级宽银幕镜头" \
+python scripts/agnes_text_to_video.py "一位身穿飘逸古风长袍的年轻剑客，在霓虹闪烁的现代都市摩天大楼之间奔跑穿梭，电影级宽银幕镜头" \
     --num-frames 121 --frame-rate 24 --width 1152 --height 768
 ```
 
@@ -286,7 +286,7 @@ python src/agnes_text_to_video.py "一位身穿飘逸古风长袍的年轻剑客
 当用户说「根据这张图片生成一段视频」：
 
 ```bash
-python src/agnes_image_to_video.py "人物缓慢转身回望镜头" \
+python scripts/agnes_image_to_video.py "人物缓慢转身回望镜头" \
     --image https://your-storage.example.com/portrait.png
 ```
 

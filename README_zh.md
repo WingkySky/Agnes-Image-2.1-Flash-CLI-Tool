@@ -62,7 +62,7 @@ agnes-media-create/
 ├── requirements.txt                      # Python 依赖
 ├── .env.example                          # 环境变量示例
 ├── .env                                  # 可选：本地 API Key 配置（自动加载）
-├── src/
+├── scripts/
 │   ├── agnes_common.py                   # 通用工具 —— .env / HTTP / 下载 / 路径
 │   ├── agnes_image_common.py             # 图片 API 封装
 │   ├── agnes_video_common.py             # 视频 API 封装（异步 + 轮询）
@@ -105,24 +105,24 @@ cp .env.example .env
 export AGNES_API_KEY='your-api-key'
 
 # 选项 C —— 命令行参数传入
-python src/agnes_text_to_image.py "提示词" --key 'your-api-key'
+python scripts/agnes_text_to_image.py "提示词" --key 'your-api-key'
 ```
 
 ### 步骤 3：开始生成内容
 
 ```bash
 # 🖼️ 文生图
-python src/agnes_text_to_image.py "日落时分的未来都市，电影级光线"
+python scripts/agnes_text_to_image.py "日落时分的未来都市，电影级光线"
 
 # 🖼️ 图生图（自动将本地文件转为 base64）
-python src/agnes_image_to_image.py "改成日落风格" -i input.jpg
+python scripts/agnes_image_to_image.py "改成日落风格" -i input.jpg
 
 # 🎬 文生视频（自动轮询直至完成）
-python src/agnes_text_to_video.py "一位剑客在霓虹摩天大楼间穿梭" \
+python scripts/agnes_text_to_video.py "一位剑客在霓虹摩天大楼间穿梭" \
     --num-frames 121 --frame-rate 24
 
 # 🎬 图生视频（单图 / 多图 / 关键帧动画模式）
-python src/agnes_image_to_video.py "角色缓慢转身回望" \
+python scripts/agnes_image_to_video.py "角色缓慢转身回望" \
     --image https://example.com/portrait.png
 ```
 
@@ -135,7 +135,7 @@ python src/agnes_image_to_video.py "角色缓慢转身回望" \
 ### 文生图 (Text-to-Image)
 
 ```bash
-python src/agnes_text_to_image.py "提示词" [选项]
+python scripts/agnes_text_to_image.py "提示词" [选项]
 ```
 
 | 参数              | 说明                                      | 默认值                     |
@@ -150,7 +150,7 @@ python src/agnes_text_to_image.py "提示词" [选项]
 ### 图生图 (Image-to-Image)
 
 ```bash
-python src/agnes_image_to_image.py "提示词" -i input.jpg [选项]
+python scripts/agnes_image_to_image.py "提示词" -i input.jpg [选项]
 ```
 
 | 参数              | 说明                                                    | 默认值                    |
@@ -163,7 +163,7 @@ python src/agnes_image_to_image.py "提示词" -i input.jpg [选项]
 ### 文生视频 (Text-to-Video)
 
 ```bash
-python src/agnes_text_to_video.py "提示词" [选项]
+python scripts/agnes_text_to_video.py "提示词" [选项]
 ```
 
 | 参数                | 说明                                                          | 默认值   |
@@ -189,7 +189,7 @@ python src/agnes_text_to_video.py "提示词" [选项]
 ### 图生视频 (Image-to-Video)
 
 ```bash
-python src/agnes_image_to_video.py "提示词" --image URL [选项]
+python scripts/agnes_image_to_video.py "提示词" --image URL [选项]
 ```
 
 支持三种输入模式：

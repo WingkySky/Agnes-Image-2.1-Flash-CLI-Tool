@@ -62,7 +62,7 @@ agnes-media-create/
 ├── requirements.txt                      # Python dependencies
 ├── .env.example                          # Example environment variables
 ├── .env                                  # Optional: local API key config (auto-loaded)
-├── src/
+├── scripts/
 │   ├── agnes_common.py                   # Common utilities — .env / HTTP / download / paths
 │   ├── agnes_image_common.py             # Image API encapsulation
 │   ├── agnes_video_common.py             # Video API encapsulation (async + polling)
@@ -105,24 +105,24 @@ cp .env.example .env
 export AGNES_API_KEY='your-api-key'
 
 # Option C — Pass via CLI argument
-python src/agnes_text_to_image.py "prompt" --key 'your-api-key'
+python scripts/agnes_text_to_image.py "prompt" --key 'your-api-key'
 ```
 
 ### Step 3: Generate Something
 
 ```bash
 # 🖼️ Text-to-Image
-python src/agnes_text_to_image.py "a futuristic city at sunset, cinematic lighting"
+python scripts/agnes_text_to_image.py "a futuristic city at sunset, cinematic lighting"
 
 # 🖼️ Image-to-Image (auto-converts local files to base64)
-python src/agnes_image_to_image.py "make it sunset style" -i input.jpg
+python scripts/agnes_image_to_image.py "make it sunset style" -i input.jpg
 
 # 🎬 Text-to-Video (auto-polls until complete)
-python src/agnes_text_to_video.py "a swordsman running through neon-lit skyscrapers" \
+python scripts/agnes_text_to_video.py "a swordsman running through neon-lit skyscrapers" \
     --num-frames 121 --frame-rate 24
 
 # 🎬 Image-to-Video (single image / multi-image / keyframe animation modes)
-python src/agnes_image_to_video.py "character slowly turning around" \
+python scripts/agnes_image_to_video.py "character slowly turning around" \
     --image https://example.com/portrait.png
 ```
 
@@ -135,7 +135,7 @@ python src/agnes_image_to_video.py "character slowly turning around" \
 ### Text-to-Image
 
 ```bash
-python src/agnes_text_to_image.py "prompt" [OPTIONS]
+python scripts/agnes_text_to_image.py "prompt" [OPTIONS]
 ```
 
 | Flag              | Description                                 | Default                        |
@@ -150,7 +150,7 @@ python src/agnes_text_to_image.py "prompt" [OPTIONS]
 ### Image-to-Image
 
 ```bash
-python src/agnes_image_to_image.py "prompt" -i input.jpg [OPTIONS]
+python scripts/agnes_image_to_image.py "prompt" -i input.jpg [OPTIONS]
 ```
 
 | Flag              | Description                                                             | Default                   |
@@ -163,7 +163,7 @@ python src/agnes_image_to_image.py "prompt" -i input.jpg [OPTIONS]
 ### Text-to-Video
 
 ```bash
-python src/agnes_text_to_video.py "prompt" [OPTIONS]
+python scripts/agnes_text_to_video.py "prompt" [OPTIONS]
 ```
 
 | Flag                | Description                                                            | Default  |
@@ -189,7 +189,7 @@ python src/agnes_text_to_video.py "prompt" [OPTIONS]
 ### Image-to-Video
 
 ```bash
-python src/agnes_image_to_video.py "prompt" --image URL [OPTIONS]
+python scripts/agnes_image_to_video.py "prompt" --image URL [OPTIONS]
 ```
 
 Supports three input modes:
