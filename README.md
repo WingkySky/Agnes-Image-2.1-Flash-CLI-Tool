@@ -1,13 +1,40 @@
-# 🎨 Agnes Image 2.1 Flash CLI Tool
+# 🎨 Agnes Media Create Skill
 
-A CLI tool for generating images using the Agnes Image 2.1 Flash API, supporting both text-to-image and image-to-image operations.
+**Skill Name**: `agnes-media-create`
+
+A CLI tool for generating media content using the Agnes Image 2.1 Flash API. Currently supports text-to-image and image-to-image operations, with future support planned for video generation.
+**The entire folder functions as a standalone Skill that can be invoked by intelligent agents.**
+
+## Project Structure (Standard Skill Layout)
+
+```
+Skill Root/ (The entire folder is invoked as a Skill)
+├── SKILL.md                      # Skill definition file (with frontmatter and usage guide)
+├── src/
+│   └── agnes_image.py            # Main image generation script
+├── requirements.txt              # Python dependencies
+├── .env.example                  # Example environment variables
+├── README.md                     # Project documentation (English)
+└── README_zh.md                  # Project documentation (Chinese)
+```
+
+## How the Skill Works
+
+1. Intelligent agents read the frontmatter (`name`, `description`) in `SKILL.md` to identify this Skill
+2. Based on the usage instructions in `SKILL.md`, agents invoke `src/agnes_image.py` for content generation
+3. Supports both text-to-image and image-to-image modes
 
 ## Features
 
+### Currently Supported
 - **Text-to-Image**: Generate images from text descriptions
 - **Image-to-Image**: Modify existing images based on text prompts
 - **Auto-organized output**: Images are automatically saved to categorized directories
 - **Customizable parameters**: Model, size, quality, and more
+
+### Future Extensions
+- **Text-to-Video**: Generate videos from text descriptions
+- **Video-to-Video**: Modify existing videos based on text prompts
 
 ## Quick Start
 
@@ -15,6 +42,8 @@ A CLI tool for generating images using the Agnes Image 2.1 Flash API, supporting
 
 ```bash
 pip install openai requests
+# Or use the provided dependencies file
+pip install -r requirements.txt
 ```
 
 ### 2. Set API Key
@@ -30,23 +59,23 @@ cp .env.example .env
 # Edit .env with your key
 ```
 
-### 3. Generate Images
+### 3. Generate Media Content
 
 ```bash
 # Text-to-Image (auto-saves to output/image/text-to-image/)
-python agnes_image.py "a cat sitting on the moon, surreal art"
+python src/agnes_image.py "a cat sitting on the moon, surreal art"
 
 # Image-to-Image (auto-saves to output/image/image-to-image/)
-python agnes_image.py "make it sunset style" -i input.jpg
+python src/agnes_image.py "make it sunset style" -i input.jpg
 
 # Custom output path (overrides default directory)
-python agnes_image.py "a cute cat" -o custom/cat.png
+python src/agnes_image.py "a cute cat" -o custom/cat.png
 
 # Custom model and size
-python agnes_image.py "mountain landscape" --size 1024x512 --quality hd
+python src/agnes_image.py "mountain landscape" --size 1024x512 --quality hd
 
 # Provide API key inline
-python agnes_image.py "a robot painting" --key sk-your-key
+python src/agnes_image.py "a robot painting" --key sk-your-key
 ```
 
 ## Output Directory Structure
@@ -106,8 +135,9 @@ output/
 
 ## File Overview
 
-- `agnes_image.py` - Main CLI script for image generation
-- `agnes_image_requirements.txt` - Python dependencies
+- `SKILL.md` - Skill definition file (includes frontmatter name/description and detailed usage guide)
+- `src/agnes_image.py` - Main CLI script for image generation
+- `requirements.txt` - Python dependencies
 - `.env.example` - Example environment configuration
 - `output/image/text-to-image/` - Default text-to-image output directory
 - `output/image/image-to-image/` - Default image-to-image output directory
